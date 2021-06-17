@@ -7,7 +7,7 @@ import org.jibble.pircbot.PircBot;
 
 public class Main extends PircBot {
 
-
+    //elo
     public static void main(String[] args) {
         SeleniumConfig.setDriver();
         BotRunner.player.startBrowser();
