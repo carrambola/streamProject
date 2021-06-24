@@ -5,7 +5,9 @@ package org.example.twitchApi;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.model.json.Stream;
+import org.example.model.json.StreamInfoDataMain;
+import org.example.model.json.StreamModeratorsData;
+import org.example.model.json.StreamModeratorsDataMain;
 
 import java.io.IOException;
 
@@ -23,9 +25,9 @@ public class TwitchApiRepo {
         try {
             String response = client.newCall(request).execute().body().string();
             ObjectMapper objectMapper = new ObjectMapper();
-            Stream streamData = objectMapper.readValue(response, Stream.class);
-            return streamData.getData()[0].getViewerCount();
-        } catch (IOException e) {
+            StreamInfoDataMain streamInfoDataMainData = objectMapper.readValue(response, StreamInfoDataMain.class);
+            return streamInfoDataMainData.getData()[0].getViewerCount();
+        }catch (IOException e) {
             e.printStackTrace();
             return null;
         }

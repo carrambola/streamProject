@@ -15,11 +15,13 @@ public class SpotifySearchPage {
     private WebElement BEST_RESULT;
     private WebElement AUTHOR_LABEL;
     private WebElement TITLE_LABEL;
+    private WebElement SKIP_BUTTON;
 
 
     public SpotifySearchPage() {
         BEST_RESULT = SeleniumConfig.driver.findElements(By.xpath("//div[@data-testid = 'tracklist-row']")).get(0);
         TITLE_LABEL = BEST_RESULT.findElement(By.xpath("./div[2]/div/div"));
+        SKIP_BUTTON = SeleniumConfig.driver.findElement(By.xpath("//button[@data-testid = 'control-button-skip-forward']"));
         try{
             AUTHOR_LABEL = BEST_RESULT.findElement(By.xpath("./div[2]/div/span[2]/a"));
         }catch(NoSuchElementException e){
@@ -77,5 +79,9 @@ public class SpotifySearchPage {
 
     public String getAuthor() {
         return AUTHOR_LABEL.getText().toLowerCase();
+    }
+
+    public void skipCurrentSong(){
+        SKIP_BUTTON.click();
     }
 }
