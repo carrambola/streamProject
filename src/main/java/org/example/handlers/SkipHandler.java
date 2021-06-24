@@ -1,6 +1,8 @@
 package org.example.handlers;
 
 import org.example.model.Player;
+import org.example.model.json.StreamModeratorsData;
+import org.example.model.json.StreamModeratorsDataMain;
 import org.example.players.SpotifyPlayer;
 import org.example.selenium.config.SeleniumConfig;
 import org.example.selenium.model.spotify.SpotifySearchPage;
@@ -13,11 +15,15 @@ import java.util.List;
 
 public class SkipHandler {
 
-    Float viewerCount;
-    List<String> votesSubmitted = new ArrayList<>();
+    private Float viewerCount;
+    private List<String> votesSubmitted = new ArrayList<>();
+    private List<StreamModeratorsData> streamModeratorsData;
+    private Player player;
 
-    public SkipHandler(Float viewerCount) {
+    public SkipHandler(Float viewerCount, List<StreamModeratorsData> streamModeratorsData, Player player) {
         this.viewerCount = viewerCount;
+        this.streamModeratorsData = streamModeratorsData;
+        this.player = player;
     }
 
     public Boolean addVote(String user) {
@@ -42,6 +48,16 @@ public class SkipHandler {
         if (shouldSkip()) {
             skipSongExecution();
             votesSubmitted.clear();
+        }
+    }
+
+    private void skipSongExecution() {
+        if (player instanceof SpotifyPlayer) {
+            SpotifySearchPage spotifySearchPage = new SpotifySearchPage();
+            spotifySearchPage.skipCurrentSong();
+        } else {
+            SongListPage songListPage = new SongListPage();
+            songListPage.skipCurrentSong();
         }
     }
 }

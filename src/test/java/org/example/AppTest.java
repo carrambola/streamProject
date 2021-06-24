@@ -114,6 +114,20 @@ public class AppTest {
         }
     }
 
+    @Test
+    public void checkIfSkipSongWorksCorrectly(){
+        player.startBrowser();
+        if(player instanceof YoutubePlayer){
+            MainPage mainpage = new MainPage();
+            SongListPage songListPage = mainpage.startSearching().searchForSong("justin bieber baby")
+                    .playFirstSong()
+                    .skipCurrentSong()
+                    .searchForNextSong("justing bieber baby")
+                    .addToQueueNextSong();
+
+        }
+    }
+
     @AfterAll
     static void afterAll() {
         SeleniumConfig.driver.close();
