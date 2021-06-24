@@ -19,6 +19,7 @@ public class SongListPage {
     private WebElement TITLE_LABEL;
     private WebElement SEARCH_BOX;
     private WebElement SONGS_BUTTON;
+    private WebElement SKIP_BUTTON_YT;
 
     public SongListPage() {
         PLAY_BUTTON = SeleniumConfig.driver.findElement(By.xpath("//ytmusic-play-button-renderer[contains(@size, 'MUSIC_PLAY_BUTTON_SIZE_SMALL')]"));
@@ -26,6 +27,7 @@ public class SongListPage {
         SEARCH_BOX = SeleniumConfig.driver.findElement(By.xpath("//input[contains(@class,'style-scope ytmusic-search-box')]"));
         SONGS_BUTTON = SeleniumConfig.driver.findElement(By.xpath("//yt-formatted-string[text() = 'Utwory']"));
         AUTHOR_LABEL = SeleniumConfig.driver.findElement(By.xpath("//div[@id='contents']/ytmusic-shelf-renderer[1]/div[2]/ytmusic-responsive-list-item-renderer/div[2]/div[3]/yt-formatted-string/a[1]"));
+        SKIP_BUTTON_YT = SeleniumConfig.driver.findElement(By.xpath("//tp-yt-paper-icon-button[@title = 'Następny utwór']"));
     }
 
     public void playFirstSong() {
@@ -86,5 +88,10 @@ public class SongListPage {
     public String getTitle() {
         TITLE_LABEL = SeleniumUtils.staleExceptionHandler("//div[@id='contents']/ytmusic-shelf-renderer[1]/div[2]/ytmusic-responsive-list-item-renderer/div[2]/div[1]/yt-formatted-string/a");
         return TITLE_LABEL.getText().toLowerCase();
+    }
+
+    public SongListPage skipCurrentSong(){
+        SKIP_BUTTON_YT.click();
+        return this;
     }
 }
