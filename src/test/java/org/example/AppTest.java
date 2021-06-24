@@ -8,6 +8,7 @@ package org.example;
 import java.util.concurrent.TimeUnit;
 
 import org.example.model.Player;
+import org.example.players.DesktopPlayer;
 import org.example.players.SpotifyPlayer;
 import org.example.players.YoutubePlayer;
 import org.example.selenium.config.SeleniumConfig;
@@ -32,7 +33,7 @@ public class AppTest {
     @BeforeAll
     static void beforeAll() {
         SeleniumConfig.setDriver();
-        player = new SpotifyPlayer();
+        player = new DesktopPlayer();
         textTester = new TextApproval();
     }
 
@@ -46,9 +47,14 @@ public class AppTest {
 
     @Test
     public void checkIfPlayingFirstSongProcessWorks() {
-        player.startBrowser();
-        player.findFirstSong("whoopty cj");
-        player.startFirstSong("whoopty cj");
+        if(player instanceof DesktopPlayer){
+            player.startFirstSong("whoopty.mp3");
+        }else{
+            player.startBrowser();
+            player.findFirstSong("whoopty cj");
+            player.startFirstSong("whoopty cj");
+        }
+
 
     }
 
