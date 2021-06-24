@@ -30,8 +30,9 @@ public class SongListPage {
         SKIP_BUTTON_YT = SeleniumConfig.driver.findElement(By.xpath("//tp-yt-paper-icon-button[@title = 'Następny utwór']"));
     }
 
-    public void playFirstSong() {
+    public SongListPage playFirstSong() {
         PLAY_BUTTON.click();
+        return this;
     }
 
     public SongValidationEnum validateSong() {
@@ -52,7 +53,7 @@ public class SongListPage {
         return false;
     }
 
-    public void addToQueueNextSong() {
+    public SongListPage addToQueueNextSong() {
         Actions rightclick = new Actions(SeleniumConfig.driver);
         while (true) {
             try {
@@ -63,6 +64,7 @@ public class SongListPage {
                 PLAY_BUTTON = SeleniumConfig.driver.findElement(By.xpath("//ytmusic-play-button-renderer[contains(@size, 'MUSIC_PLAY_BUTTON_SIZE_SMALL')]"));
             }
         }
+        return this;
     }
 
     public SongListPage searchForNextSong(String song) {
@@ -77,7 +79,7 @@ public class SongListPage {
             e.printStackTrace();
         }
 
-        return new SongListPage();
+        return this;
     }
 
     public String getAuthor() {

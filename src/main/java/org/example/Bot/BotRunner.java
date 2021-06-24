@@ -22,7 +22,7 @@ public class BotRunner extends PircBot {
         if (message.startsWith("!sr")) {
             songRequest(message,sender,channel);
         } else if (message.startsWith("!sv")) {
-            SkipHandler skipHandler = new SkipHandler(twitchApiRepo.getLiveUserCount().floatValue());
+            SkipHandler skipHandler = new SkipHandler(twitchApiRepo.getLiveUserCount().floatValue(),twitchApiRepo.getModerators(), player);
             skipHandler.addVote(sender);
             skipHandler.skipSong();
         }
