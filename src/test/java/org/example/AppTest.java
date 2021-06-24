@@ -33,7 +33,7 @@ public class AppTest {
     @BeforeAll
     static void beforeAll() {
         SeleniumConfig.setDriver();
-        player = new DesktopPlayer();
+        player = new YoutubePlayer();
         textTester = new TextApproval();
     }
 

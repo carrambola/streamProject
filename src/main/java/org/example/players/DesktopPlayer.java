@@ -1,92 +1,23 @@
 package org.example.players;
 
 
-import org.example.enums.SongValidationEnum;
-import org.example.model.Player;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
-
-import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
-import static javax.sound.sampled.AudioSystem.getAudioInputStream;
+import javazoom.jl.player.Player;
+import java.io.FileInputStream;
 
 
-public class DesktopPlayer implements Player {
+
+public class DesktopPlayer {
 
 
-    @Override
+
     public void startFirstSong(String title) {
-        final DesktopPlayer player = new DesktopPlayer();
-        player.play("whoopty.mp3");
-
-    }
-
-    @Override
-    public void startBrowser() {
-
-    }
-
-    @Override
-    public String getUrl() {
-        return null;
-    }
-
-    @Override
-    public SongValidationEnum findFirstSong(String title) {
-        return null;
-    }
-
-    @Override
-    public SongValidationEnum findNextSong(String title) {
-        return null;
-    }
-
-    @Override
-    public void addToQueueNextSong(String title) {
-
-    }
-
-
-    public void play(String filePath) {
-        final File file = new File(filePath);
-
-        try (final AudioInputStream in = getAudioInputStream(file)) {
-
-            final AudioFormat outFormat = getOutFormat(in.getFormat());
-            final DataLine.Info info = new DataLine.Info(SourceDataLine.class, outFormat);
-
-            try (final SourceDataLine line =
-                         (SourceDataLine) AudioSystem.getLine(info)) {
-
-                if (line != null) {
-                    line.open(outFormat);
-                    line.start();
-                    stream(getAudioInputStream(outFormat, in), line);
-                    line.drain();
-                    line.stop();
-                }
-            }
-
-        } catch (UnsupportedAudioFileException
-                | LineUnavailableException
-                | IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private AudioFormat getOutFormat(AudioFormat inFormat) {
-        final int ch = inFormat.getChannels();
-
-        final float rate = inFormat.getSampleRate();
-        return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
-    }
-
-    private void stream(AudioInputStream in, SourceDataLine line)
-            throws IOException {
-        final byte[] buffer = new byte[4096];
-        for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
-            line.write(buffer, 0, n);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(title);
+            Player playMP3 = new Player(fis);
+            playMP3.play();
+        }catch (Exception e){
         }
     }
 }
