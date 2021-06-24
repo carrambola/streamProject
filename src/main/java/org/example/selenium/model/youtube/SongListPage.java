@@ -33,6 +33,8 @@ public class SongListPage {
     public SongListPage playFirstSong() {
         PLAY_BUTTON.click();
         return this;
+    public void playFirstSong() {
+        PLAY_BUTTON.click();
     }
 
     public SongValidationEnum validateSong() {
@@ -54,6 +56,7 @@ public class SongListPage {
     }
 
     public SongListPage addToQueueNextSong() {
+    public void addToQueueNextSong() {
         Actions rightclick = new Actions(SeleniumConfig.driver);
         while (true) {
             try {
@@ -79,7 +82,9 @@ public class SongListPage {
             e.printStackTrace();
         }
 
+
         return this;
+        return new SongListPage();
     }
 
     public String getAuthor() {

@@ -35,7 +35,6 @@ public class TwitchApiRepo {
             return null;
         }
     }
-
     public List<StreamModeratorsData> getModerators(){
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
