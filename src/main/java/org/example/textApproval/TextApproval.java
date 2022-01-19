@@ -15,21 +15,7 @@ public class TextApproval {
     //TODO:banned songs and kurwa inne piekne rzeczy
 
     public TextApproval() {
-        forbiddenWords.add("nigga");
-        forbiddenWords.add("ni**a");
-        forbiddenWords.add("niggas");
-        forbiddenWords.add("ni**as");
-        forbiddenWords.add("nigger");
-        forbiddenWords.add("ni**er");
-        forbiddenWords.add("simp");
-        forbiddenWords.add("murzyn");
-        forbiddenWords.add("czarnuch");
-        forbiddenWords.add("niggers");
-        forbiddenWords.add("ni**ers");
-        forbiddenWords.add("mokambe");
-        forbiddenWords.add("pedał");
-        forbiddenWords.add("pedalskie");
-        forbiddenWords.add("pedal");
+        forbiddenWords.add("standin1");
     }
 
     private String readContents(String urlAdress) {
